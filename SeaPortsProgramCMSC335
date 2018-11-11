@@ -1,0 +1,252 @@
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+import java.util.HashMap;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.util.Map.Entry;
+import java.io.FileReader;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.*;
+import java.util.Collections;
+import java.util.function.Consumer;
+import javax.swing.*;
+import javax.swing.JFileChooser;
+
+
+public class SeaPortsProgramCMSC335 extends JFrame {
+
+    //This creates an instance of world in parent class
+    WorldCMSC335 world;
+
+    //Variable Declarations
+    //variable for JTextArea / initializing editable text area
+    JTextArea textArea = new JTextArea();
+    //Read Button variable to read in file
+    JButton readButton;
+    //Sort buttton variable to sort through the information in the file.
+    JButton sortingButton;
+    //Search BUtton variable to search for "Things" in file
+    JButton searchButton;
+    //Combo Box variable to select between (Number of Index, Person Skill Set, Person / Ship / Port) "File Attributes"
+    JComboBox<String> comboBox;
+    //Text Field variable to enter in search information in file
+    JTextField textField;
+    //Scanner variable Used to parse information in the file. Can Parse primitive types and strings
+    Scanner scanIn;
+    // Fiel variable Used to obtain desired file for file chooser code and potion of program
+    File selectedFile;
+        //COMMENTS
+        HashMap<Integer, ShipCMSC335> hashShip = new HashMap<>();
+        //COMMENTS
+	HashMap<Integer, DockCMSC335> hashDock = new HashMap<>();
+        //COMMENTS
+	HashMap<Integer, SeaPortCMSC335> hashPort = new HashMap<>();
+        //COMMENTS
+	private JButton sortButton;
+        //COMMENTS
+	String[] sortFileStrings = { "totalWeight", "hullLength", "hullWidth", "depthDraft" };;
+        //COMMENTS
+    private Object sortComboBox;
+    private Object mainShip;
+    private Object mainDock;
+
+
+    public SeaPortsProgramCMSC335() {
+        //Setting the size, title and clode operation of the program window
+        //This code is handled first in the GUI for the window
+        setTitle("Sea Ports Program CMSC335");
+        //Setting size of the window
+        setSize(1000, 800);
+        //setting close operation of the window
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setting the window to be visible
+        setVisible(true);
+        //The JScrollPane is for the development of the window pane scroll panel.
+        //As per rubric, we want a pane that we can scroll
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        add(scrollPane, BorderLayout.CENTER);
+        //Creation of the search and read buttons as per rubric
+        //The read button is for the user to read in a file
+        //The search button is for the user to search for pertinent information in the file
+        //When read button is clicked with no text entered, it invokes the file chooser again
+        JButton readButton = new JButton("Read In File");
+        //COMMENTS
+        JButton sortingButton = new JButton("Sort Through");
+        //COMMENTS
+        JButton searchButton = new JButton("Search In File");
+        //This jlabel was created as per rubric and is to label the search field
+        JLabel label = new JLabel("Search For");
+        //The creation of the text field per rubric to enter information for search
+        JTextField textField = new JTextField(20);
+        //Adding the items as per rubric to the jcombobox to select between needed info
+        //The user can select between the index number, skill set, and name of person
+        String[] array = {"Number of Index", "Person Skill Set", "Person / Ship / Port"};
+        JComboBox<String> comboBox = new JComboBox(array);
+        //COMMENTS
+        JComboBox<String> sortComboBox = new JComboBox<>(sortFileStrings);
+        //Creation of the main panel for the window
+        //Added the apprpriate GUI Components
+        JPanel mainPanel = new JPanel();
+        //adding the read button to the window
+        mainPanel.add(readButton);
+        //COMMENTS
+        mainPanel.add(sortingButton);
+        //adding search button to the window
+        mainPanel.add(searchButton);
+        //adding label to the window
+        mainPanel.add(label);
+        //adding text field to the window
+        mainPanel.add(textField);
+        //adding combo box to the window
+        mainPanel.add(comboBox);
+        //COMMENTS
+        mainPanel.add(sortComboBox);
+        //Adding a border layout to the program panel
+        add(mainPanel, BorderLayout.PAGE_START);
+        //Read In File method created for file chooser and action listener for read buton
+        readIn();
+            //COMMENTS
+            sortingButton.addActionListener((ActionEvent e) -> {
+                //A string that denotes the start of the sorted data within the text area.
+                textArea.append("\n\n------DATA HAS BEEN SORTED\n");
+                //COMMENTS
+                String sortInput = sortComboBox.getSelectedItem().toString();
+                //COMMENTS
+                String resultText = sortResult(sortInput);
+                //COMMENTS
+                textArea.append(resultText);
+        });
+                //COMMENTS
+		readButton.addActionListener((ActionEvent e) -> {
+                    //COMMENTS
+                    readIn();
+        });
+                //COMMENTS
+		searchButton.addActionListener((ActionEvent e) -> {
+                //COMMENTS    
+                    searchIn((String) comboBox.getSelectedItem(), textField.getText());
+        });
+
+	} // end 
+
+                //COMMENTS
+                private String sortResult(String sortInput) {
+                //COMMENTS    
+		String result = "";
+                //COMMENTS
+		ArrayList<ShipCMSC335> ships = new ArrayList<>();
+		//COMMENTS
+                world.ports.forEach((SeaPortCMSC335 mainSeaPort) -> {
+                    //COMMENTS
+                    mainSeaPort.ships.forEach((ShipCMSC335 mainShip1) -> {
+                        ships.add(mainShip1);
+                    });
+                });
+		//COMMENTS
+        switch (sortInput) {
+            //COMMENTS
+            case "totalWeight":
+                Collections.sort(ships, new QueCMSC335("hullWidth"));
+                break;
+            //COMMENTS    
+            case "hullWidth":
+                Collections.sort(ships, new QueCMSC335("hullWidth"));
+                break;
+            //COMMENTS
+            case "hullLength":
+                Collections.sort(ships, new QueCMSC335("hullLength"));
+                break;
+            //COMMENTS    
+            case "depthDraft":
+                Collections.sort(ships, new QueCMSC335("depthDraft"));
+                break;
+            default:
+                break;
+        }
+        //COMMENTS
+        result = ships.stream().map((ship) -> ship.toString() + "\n").reduce(result, String::concat);
+		return result;
+	}
+       
+        /**
+         * I was not sure how to implement a file chooser So, I looked it up,
+         * and obtained idea from FileFilter for JFileChooser. (n.d.). Retrieved
+         * October 29, 2018, from
+         * https://stackoverflow.com/questions/20411919/filefilter-for-jfilechooser
+         *
+         * Another website used for help was Java Code Examples for
+         * javax.swing.filechooser.FileNameExtensionFilter. (n.d.). Retrieved
+         * October 29, 2018, from
+         * https://www.programcreek.com/java-api-examples/javax.swing.filechooser.FileNameExtensionFilter
+         *
+         * Below is the JFileChooser Code which enables a user to select a file
+         *
+         */
+	public void readIn() {
+             //Code for the file chooser with start file as per rubric
+		JFileChooser chooser = new JFileChooser(".");
+                //COMMENTS
+		int result = chooser.showOpenDialog(new JFrame());
+                //COMMENTS
+		if (result == JFileChooser.APPROVE_OPTION) {
+			try {
+				scanIn = new Scanner(new FileReader(chooser.getSelectedFile()));
+			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "The File selected is not found. Select another File Please.");
+			}
+		} 
+                //COMMENTS
+		world = new WorldCMSC335(scanIn);
+		
+		
+		
+        //COMMENTS
+        world.ports.forEach((mainSeaPort) -> {
+            hashPort.put(mainSeaPort.index, mainSeaPort);
+        });
+		
+		
+        //Add ship COMMENTS
+        world.ports.forEach((mainSeaPort) -> {
+            mainSeaPort.ships.forEach((mainShip) -> {
+                hashShip.put(mainShip.index, mainShip);
+                    });
+        });
+		
+        //dd Dock COMMENTS
+        world.ports.forEach((mainSeaPort) -> {
+            mainSeaPort.docks.forEach((mainDock) -> {
+                hashDock.put(mainDock.index, mainDock);
+                    });
+        });
+        //COMMENTS
+		textArea.setText(world.toString());
+	} // end method readFile
+        //COMMENTS
+	public void searchIn(String type, String target) {
+            //COMMENTS
+		textArea.append("\n\nSearch for " + type.toLowerCase() + " " + target
+				+ ": \n");
+            //COMMENTS    
+		textArea.append("\t" + world.search(type, target));
+	} // end 
+
+	public static void main(String[] args) {
+		SeaPortsProgramCMSC335 CMSC335 = new SeaPortsProgramCMSC335();
+	} // end main
+} // end class
+
