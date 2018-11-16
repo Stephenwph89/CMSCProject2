@@ -1,0 +1,65 @@
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class JobCMSC335 extends ThingCMSC335 {
+//data type double variable for length of job
+    double lengthOfJob;
+    //Array contains skills of persons
+    /*
+    * Ideas for implementing array list
+    * 
+    *Singh, C., P., B., S., V., Jamuar, R. R., . . . Raj, H. 
+    *(2018, September 03). ArrayList in java with example programs - Collections Framework.
+    * Retrieved October 27, 2018, from https://beginnersbook.com/2013/12/java-arraylist/
+    *
+    *
+    */
+    ArrayList<String> skill = new ArrayList<>(); 
+    //Scanner Constructor for job class
+    public JobCMSC335(Scanner jobScanner) {
+        super(jobScanner);
+        //if statement uses double data type and length of job scanner 
+        if (jobScanner.hasNextDouble()) {
+            //length of job variable for job scanner data type double
+            lengthOfJob = jobScanner.nextDouble();
+        }
+        //while loop for job scanner
+        while (jobScanner.hasNext()) {
+            String jobString = jobScanner.next();
+            //checking for repeat of persons job skill
+            for (String mainJob : skill) { 
+                //if staement / if skill equals the string provided by user
+                if (mainJob.equals(jobString)) {
+                    jobString = null;
+                }
+            }
+            //if statement for job string / not equal to null / add the string
+            if (jobString != null) {
+                //add string
+                skill.add(jobString);
+            }
+        }
+    } // end 
+     //toStirng() method for job class / object ---> string
+    @Override
+    public String toString() {
+        //persons job string concatenated to skill
+        String jobString = "Person's Job: " + super.toString() + " " + skill;
+        //return skill as output via user input
+        return jobString;
+    } // end 
+} // end 
