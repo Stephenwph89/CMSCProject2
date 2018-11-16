@@ -1,0 +1,44 @@
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+import java.util.Scanner;
+
+
+public class DockCMSC335 extends ThingCMSC335 {
+    
+   //Instance of ship in dock class
+	ShipCMSC335 ship;
+     //scan constructor for dock class   
+	public DockCMSC335(Scanner scanIn) {
+		super(scanIn);
+	}
+	//toString() method for object ---> string for dock
+        @Override
+	public String toString() {
+        //concatenated string dock to string method
+        String dockString = "Dock: " + super.toString();
+        //if statement if null return string dock
+        if(ship == null) {
+            //return the string
+            return dockString;
+        }
+        // string concatenated with ship
+        dockString += "\n  " + ship;
+        //retun string
+        return dockString;
+    } // end 
+
+    boolean getShip() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+} // end 
