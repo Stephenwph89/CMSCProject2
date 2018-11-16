@@ -1,0 +1,21 @@
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+//used for an instance for port time in the WorldCMSC335 Class
+public class PortTimeCMSC335 {
+    
+    
+    //int data type variable for PortTime (time at port)
+    int time;
+
+}
