@@ -1,0 +1,122 @@
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Scanner;
+
+
+public class ShipCMSC335 extends ThingCMSC335{
+    //Added arrivalTime and dockTime variable  AS PER RUBRIC
+    PortTimeCMSC335 arrivalTime,dockTime;
+    //Added parameter variables for ship dimensions AS PER RUBRIC
+    double depthDraft,hullLength,totalWeight,hullWidth;
+    //ArrayList for jobs AS PER RUBRIC
+    ArrayList<JobCMSC335> jobs;
+    
+
+    
+    public ShipCMSC335(Scanner scanIn)
+    {
+        super(scanIn);
+        //scanIn totalWeight
+        totalWeight=scanIn.nextDouble();
+        //scanIn hullLength
+        hullLength=scanIn.nextDouble();
+        //scanIn hullWidth
+        hullWidth=scanIn.nextDouble();
+        //scanIn depthDraft
+        depthDraft=scanIn.nextDouble(); 
+        //jobs variable for ArrayList
+        jobs=new ArrayList<>();
+    }
+    
+    
+    
+    //getter for arrivale time
+    public PortTimeCMSC335 getArrivalTime() {
+        //return the arrival time AS PER RUBRIC
+        return arrivalTime;
+    }
+       //setter for arrival time
+    public void setArrivalTime(PortTimeCMSC335 arrivalTime) {
+        //setting arrival time variable AS PER RUBRIC
+        this.arrivalTime = arrivalTime;
+    }
+        //getter for dock time
+    public PortTimeCMSC335 getDockTime() {
+        //returning dock time AS PER RUBRIC
+        return dockTime;
+    }
+        //setting dock time
+    public void setDockTime(PortTimeCMSC335 dockTime) {
+        //setting dock time variable AS PER RUBRIC
+        this.dockTime = dockTime;
+    }
+        //getting depth draft 
+    public double getdepthDraft() {
+        //returning depth draft AS PER RUBRIC
+        return depthDraft;
+    }
+        //setting depth draft
+    public void setdepthDraft(double depthDraft) {
+        //settin depth draft varibale AS PER RUBRIC
+        this.depthDraft = depthDraft;
+    }
+        //getter for hull length
+    public double gethullLength() {
+        //returning hul lenghth AS PER RUBRIC
+        return hullLength;
+    }
+        //setting hull length
+    public void sethullLength(double hullLength) {
+        //setting hull length variable
+        this.hullLength= hullLength;
+    }
+        //getter for total weight of ship
+    public double gettotalWeight() {
+        //returning total weight of ship AS PER RUBRIC
+        return totalWeight;
+    }
+        //setting total weight of ship
+    public void settotalWeight(double totalWeight) {
+        //setting total weight of ship variable AS PER RUBRIC
+        this.totalWeight = totalWeight;
+    }
+        //getting hull width
+    public double gethullWidth() {
+        //returning hull width AS PER RUBRIC
+        return hullWidth;
+    }
+        //setting hull width
+    public void sethullWidth(double width) {
+        //setting hull width variable AS PER RUBRIC
+        this.hullWidth = hullWidth;
+    }
+        //gettter for jobs array list
+    public ArrayList<JobCMSC335> getJobs() {
+        //returning jobs from array list
+        return jobs;
+    }
+        //setter for jobs array list
+    public void setJobs(ArrayList<JobCMSC335> jobs) {
+        //settting jobs variable from array list
+        this.jobs = jobs;
+    }
+
+   
+    
+    
+    
+}
