@@ -1,0 +1,39 @@
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+import java.util.Scanner;
+
+//person class for the creation of a person / read a person from file
+public class PersonCMSC335 extends ThingCMSC335 {
+
+    //variable String Type for persons skill in the file
+    String skill;
+    
+//Scanner Constructor for person class
+    public PersonCMSC335(Scanner scanPerson) {
+        super(scanPerson);
+        //if staement for scanning through persons in class person in the file
+        if (scanPerson.hasNext()) {
+            //scanning for persons skill in file based on user input
+            skill = scanPerson.next();
+        }
+    } // end
+    //toString() method for object ---> string
+    @Override
+    public String toString() {
+        //concatenating string to variable skill
+        String stringSkill = "Person: " + super.toString() + " " + skill;
+        //retun te persons skill in file as output based on user input
+        return stringSkill;
+    } // end 
+} // end 
