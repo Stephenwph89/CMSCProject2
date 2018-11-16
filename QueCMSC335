@@ -1,0 +1,115 @@
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+import java.util.Comparator;
+
+
+public class QueCMSC335 implements Comparator<ShipCMSC335> {
+    
+    //parameter variable for comparing numbers within txt file
+    private final String parameter;
+
+    
+    public QueCMSC335(String parameter) {
+        //parameter variable
+        this.parameter = parameter;
+    }
+
+    @Override
+    //compare method
+    public int compare(ShipCMSC335 param1, ShipCMSC335 param2) {
+        //paramResult variable for switch case
+        int paramResult;
+        //default value
+        paramResult = -1;
+        /**
+         * 
+         * statement, H. (2018). How to use greater than or equal in a switch statement. 
+         * [online] Stack Overflow. Available at:
+         * https://stackoverflow.com/questions/18510360/how-to-use-greater-than-or-equal-in-a-switch-statement
+         * [Accessed 11 Nov. 2018].
+         *
+         */
+        //switch case for logical decision making for parameters
+        switch (parameter.charAt(0)) {
+            //case 1
+            case '1':
+                //if staement comparing param 1 to param 2     
+                if (param1.gettotalWeight() == param2.gettotalWeight()) {
+                    paramResult = 0;
+                    //else if for param1 and param2               
+                } else if (param1.gettotalWeight() > param2.gettotalWeight()) {
+                    paramResult = 1;
+                    //else for default param value                 
+                } else {
+                    paramResult = -1;
+                }
+                break;
+            //Case 2         
+            case '2':
+                //if statment to compare param1 to param2
+                if (param1.gethullLength() == param2.gethullLength()) {
+                    paramResult = 0;
+                    //else if statement to compare param1 to param2               
+                } else if (param1.gethullLength() > param2.gethullLength()) {            
+                    paramResult = 1;
+                    //else staement for default param value               
+                } else {
+                    paramResult = -1;
+                }
+                break;
+            //case 3           
+            case '3':
+                //if statement to compare param1 to param2
+                if (param1.getdepthDraft() == param2.getdepthDraft()) {
+                    paramResult = 0;
+                    //else if statement to compare param1 to param2              
+                } else if (param1.getdepthDraft() > param2.getdepthDraft()) {            
+                    paramResult = 1;
+                    //else statement for default param value
+                } else {
+                    paramResult = -1;
+                }
+                break;
+            //case 4          
+            case '4':
+                //if statement to compare param 1 to param 2
+                if (param1.gethullWidth() == param2.gethullWidth()) {
+                    paramResult = 0;
+                    //else if statement to compare param1 to param 2            
+                } else if (param1.gethullWidth() > param2.gethullWidth()) {          
+                    paramResult = 1;
+                    //else statement for default param value
+                } else {
+                    paramResult = -1;
+                }
+                break;
+            //default case
+            default:
+                //if staement to compare param1 to param2
+                if (param1.gethullWidth() == param2.gethullWidth()) {
+                    paramResult = 0;
+                    //else if staement to compare param1 to param2        
+                } else if (param1.gethullWidth() > param2.gethullWidth()) {
+                           
+                    paramResult = 1;
+                    //else staement for default param value
+                } else {
+                    paramResult = -1;
+                }
+                break;
+        }
+        //return the parameter result from the comparison
+        return paramResult;
+    }
+}
