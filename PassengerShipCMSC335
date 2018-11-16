@@ -1,0 +1,59 @@
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+import java.util.Scanner;
+
+
+public class PassengerShipCMSC335 extends ShipCMSC335 {
+    //Variable Declarations for occupied rooms, # passengers, # rooms
+    //data type int variable for occupied rooms
+	int numberOfOccupiedRooms;
+    //data type int # of passengers
+	int numberOfPassengers;
+    //data type int # of rooms
+	int numberOfRooms;
+	//Scanner Constructor for PassengerShip Class 
+	public PassengerShipCMSC335(Scanner scanNumber) {
+        super(scanNumber);
+        //if statement 2 scan number of passengers in file for pship
+        if(scanNumber.hasNextInt()) {
+            //number of passengers variable to scanner in file for pship
+            numberOfPassengers = scanNumber.nextInt();
+        } 
+          //if statement 2 scan number of rooms in file for pship
+        if(scanNumber.hasNextInt()) {
+            //number of rooms variable to scanner in file for pship
+            numberOfRooms = scanNumber.nextInt();
+        }
+        //if statement 2 scan number of occupied rooms in file for pship
+        if(scanNumber.hasNextInt()) {
+            //number of occupied rooms variable to scanner in file for pship
+            numberOfOccupiedRooms = scanNumber.nextInt();
+        } 
+    } // end 
+	//to string method objects ---> string
+        @Override
+	public String toString() {
+            //Concatenate string to method
+        String passengerString = "Passenger ship: " + super.toString();
+        //if statement for job is empty to return Passenger ship:
+        if(jobs.isEmpty()) {
+            //retun string
+            return passengerString;
+        }
+            // jobs entered concatenate string to name of job entered
+            passengerString = jobs.stream().map((mainJobs) -> "\n    - " + mainJobs).reduce(passengerString, String::concat);
+        //return name of job
+        return passengerString;
+    } // end 
+} // end 
