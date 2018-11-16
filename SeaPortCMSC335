@@ -1,0 +1,69 @@
+
+/**
+ *Stephen Hamilton
+ *Class: CMSC 335
+ *Section: 7981
+ *Instructor: Dinsoreanu, Mihaela
+ *Assignment: Project 2 Sea Port
+ * Purpose: The purpose of this project is to create a program so
+ * a user can read in a data file, search a data file,
+ * and sort information through use of JFileChooser
+ * 
+ *Date Started: 11/9/2018
+ *Due Date: 11/18/2018
+ */
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SeaPortCMSC335 extends ThingCMSC335 {
+
+    //These array lists are to create a list of items dock, ship, person, also includes a que 
+    // This code is for the list of docks / variable declarations dock, que, ships, person
+    /*
+    * Ideas for implementing array list
+    * 
+    *Singh, C., P., B., S., V., Jamuar, R. R., . . . Raj, H. 
+    *(2018, September 03). ArrayList in java with example programs - Collections Framework.
+    * Retrieved October 27, 2018, from https://beginnersbook.com/2013/12/java-arraylist/
+    *
+    *
+     */
+    // This code is for the list of docks / variable declarations dock, que, ships, person
+    //as per rubric
+    ArrayList<DockCMSC335> docks = new ArrayList<>();
+    //This code makes a list of ships that are waiting to park in dock
+    //as per rubric
+    ArrayList<ShipCMSC335> que = new ArrayList<>();
+    //This code makes a list of ships
+    // as per rubric
+    ArrayList<ShipCMSC335> ships = new ArrayList<>();
+    //This code is for the people with particular skills at the specific port
+    //as per rubric
+    ArrayList<PersonCMSC335> person = new ArrayList<>();
+    Iterable<PersonCMSC335> persons;
+
+    // Scanner constructor for sea port class
+    public SeaPortCMSC335(Scanner scanArray) {
+        super(scanArray);
+    }
+    //method toString for objects ---> to string
+
+    @Override
+    public String toString() {
+        //seaPortString to  super.toSttring() 
+        String seaPortString = "\n\nSeaPort: " + super.toString() + '\n';
+        //concatenate string for docks to "que for ships looking to dock"
+        seaPortString = docks.stream().map((mainDock) -> "\n" + mainDock).reduce(seaPortString, String::concat);
+        seaPortString += "\n\n ---  que for ships looking to dock:";
+        //concatenate string for que to "que for ships looking to dock:"
+        seaPortString = que.stream().map((mainString) -> "\n  > " + mainString).reduce(seaPortString, String::concat);
+        seaPortString += "\n\n --- all ships:";
+        //concatenate string for ships to " --- all ships"
+        seaPortString = ships.stream().map((mainString) -> "\n  > " + mainString).reduce(seaPortString, String::concat);
+        seaPortString += "\n\n --- all persons:";
+        //concatenate string for person to "--- all persons"
+        seaPortString = person.stream().map((mainPerson) -> "\n  > " + mainPerson).reduce(seaPortString, String::concat);
+        //return string after user searches for specific string specified in loops
+        return seaPortString;
+    } // end method 
+} // end class 
